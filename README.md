@@ -1,8 +1,9 @@
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
-# Class Diagram
-Simple diagram which should my initial thoughts.
+# Diagram
+Simple diagram which shows my initial thoughts.  
+Not really UML, not really a flow chard, not really a sequence diagram.  Just my thoughts through an UML tool.  
 Can be edited with https://draw.io
 
 # Initial specification notes
