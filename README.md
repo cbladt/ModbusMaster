@@ -1,6 +1,10 @@
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
+# Class Diagram
+Simple diagram which should my initial thoughts.
+Can be edited with https://draw.io
+
 # Initial specification notes
 * ModbusMaster must support following modbus functions codes.
   * Read Input Registers (4)
