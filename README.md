@@ -1,7 +1,7 @@
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
-# Initial specification
+# Initial specification notes
 * ModbusMaster must support following modbus functions codes.
   * Read Input Registers (4)
   * Read Holding Registers (3)
