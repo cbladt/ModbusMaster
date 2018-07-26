@@ -11,5 +11,3 @@ One Modbus Master implementation to rule them all!
 * ModbusMaster must be designed in a way that makes it easy to add further function codes.
 
 * ModbusMaster shall not be specifc to any hardware.
-
-* ModbusMaster shall not use dynamic memory, as it is not available on all targeted platforms.
