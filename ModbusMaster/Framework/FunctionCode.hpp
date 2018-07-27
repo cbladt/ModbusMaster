@@ -1,0 +1,4 @@
+#ifndef FUNCTIONCODE_HPP
+#define FUNCTIONCODE_HPP
+
+#endif // FUNCTIONCODE_HPP
