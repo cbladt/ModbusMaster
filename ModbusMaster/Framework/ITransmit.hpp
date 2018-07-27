@@ -1,4 +1,0 @@
-#ifndef ITRANSMIT_HPP
-#define ITRANSMIT_HPP
-
-#endif // ITRANSMIT_HPP
