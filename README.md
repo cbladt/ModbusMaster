@@ -3,7 +3,8 @@ One Modbus Master implementation to rule them all!
 
 # Thoughts
 This design will give some issues when reading the response.  
-As the frames are very specific to their functioncode, the framelayer cannot handle the parsing alone..
+As the frames are very specific to their functioncode, the framelayer cannot handle the parsing alone..  
+Maybe the FrameModel should be specific to function code, and the framelayer can ask the router/strategies for a FrameModel after the first 2 bytes have been received.  
 
 ### Register VS Parameter
 I imagine a parameter as an abstraction from one or more modbus registers.
