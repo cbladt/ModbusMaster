@@ -1,6 +1,12 @@
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
+# Thoughts
+### Register VS Parameter
+I imagine a parameter as an abstraction from one or more modbus registers.  
+A parameter is that you access and use from the application code, where the underlying registers is what is read and written on the protocol.  
+Practically a parameter will simply consist of a modbus start address and a length.  
+
 # Diagram
 Simple diagram which shows my initial thoughts.  
 Not really UML, not really a flow chard, not really a sequence diagram.  Just my thoughts through an UML tool.  

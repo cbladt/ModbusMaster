@@ -1,0 +1,4 @@
+#ifndef IDATALINK_HPP
+#define IDATALINK_HPP
+
+#endif // IDATALINK_HPP
