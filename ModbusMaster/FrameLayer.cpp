@@ -55,6 +55,7 @@ namespace ModbusMaster
 
             case ReceiveState::FunctionCode:
             {
+		// tbd : Handle exception!
                 if (static_cast<Framework::FunctionCode>(byte) == _expectedHeader.GetFunctionCode())
                 {
                     _receiveState = ReceiveState::Data;
