@@ -3,6 +3,7 @@ One Modbus Master implementation to rule them all!
 
 # Thoughts / Notes / TBD  
 * Add IsBusy to public interface.  
+* Is it too unsafe to just expect that the data received in a strategy corresponds to the ones sent?
 * Fix all the 'tbd' added in code.  
 
 ### Framework
