@@ -2,8 +2,10 @@
 
 namespace ModbusMaster
 {
-    ModbusMaster::ModbusMaster(IDataLink &datalink) :
-        _datalink(datalink)
+    ModbusMaster::ModbusMaster(IDataLink &datalink, IReadRegistersCallback& readRegistersCallback) :
+        _datalink(datalink),
+        _readInputStrategy(readRegistersCallback),
+        _readHoldingStrategy(readRegistersCallback)
     {
         // ModbusMaster -> Framerouter.
         Subscribe(_frameRouter);
@@ -22,6 +24,15 @@ namespace ModbusMaster
 
         // IDataLink -> FrameLayer.
         _datalink.Subscribe(_frameLayer);
+
+        // The strategy in use has told the Framelayer to be called back on.
+
+
+    }
+
+    void ModbusMaster::Service(uint64_t ms)
+    {
+        _frameLayer.Service(ms);
     }
 
     bool ModbusMaster::ReadParameters(uint8_t slave, Framework::FunctionCode type, uint16_t startAddress, uint16_t count)

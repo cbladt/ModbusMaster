@@ -1,16 +1,18 @@
 #ifndef FRAMEROUTER_HPP
 #define FRAMEROUTER_HPP
 
+#include <RequestModel.hpp>
+
+#include <Strategies/ReadRegistersStrategy.hpp>
+
 #include <Framework/IReceive.hpp>
 #include <Framework/TransmitBase.hpp>
-#include <Strategies/ReadRegistersStrategy.hpp>
-#include <RequestModel.hpp>
 
 #include <cstdint>
 
 namespace ModbusMaster
 {
-    class FrameRouter :
+    class FrameRouter :            
             public Framework::IReceive<RequestModel>
     {
     public:

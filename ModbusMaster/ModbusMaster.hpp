@@ -2,10 +2,15 @@
 #define MODBUSMASTER_HPP
 
 #include <IDataLink.hpp>
+#include <IReadRegistersCallback.hpp>
+
 #include <RequestModel.hpp>
-#include <Strategies/ReadRegistersStrategy.hpp>
 #include <FrameRouter.hpp>
 #include <FrameLayer.hpp>
+
+#include <Strategies/ReadRegistersStrategy.hpp>
+
+#include <Framework/IServiceable.hpp>
 #include <Framework/FunctionCode.hpp>
 #include <Framework/TransmitBase.hpp>
 
@@ -15,10 +20,13 @@
 namespace ModbusMaster
 {
     class ModbusMaster :
+            public FrameLayer::IServiceable,
             protected Framework::TransmitBase<RequestModel>
     {
     public:
-        ModbusMaster(IDataLink& datalink);
+        ModbusMaster(IDataLink& datalink, IReadRegistersCallback& readRegistersCallback);
+
+        void Service(uint64_t ms) override;
 
         bool ReadParameters(uint8_t slave, Framework::FunctionCode type, uint16_t startAddress, uint16_t count);
 

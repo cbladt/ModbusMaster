@@ -21,25 +21,29 @@ HEADERS += \
     ../ModbusMaster/Strategies/ReadRegistersStrategy.hpp \
     ../ModbusMaster/Framework/TransmitBase.hpp \    
     ../ModbusMaster/Framework/IReceive.hpp \
-    ../ModbusMaster/Framework/FunctionCode.hpp \
-    ../ModbusMaster/Framework/Parameter.hpp \
+    ../ModbusMaster/Framework/FunctionCode.hpp \    
     ../ModbusMaster/Framework/ParameterType.hpp \    
     ../ModbusMaster/Strategies/IStrategy.hpp \
     ../ModbusMaster/Framework/Frame/IFrame.hpp \
     ../ModbusMaster/Framework/Frame/ReadRegistersFrame.hpp \
-    ../ModbusMaster/Framework/Frame/FrameHeader.hpp
+    ../ModbusMaster/Framework/Frame/FrameHeader.hpp \
+    ../ModbusMaster/Framework/Frame/FrameRequestModel.hpp \
+    ../ModbusMaster/Framework/IServiceable.hpp \
+    ../ModbusMaster/Framework/Tick_t.hpp \
+    ../ModbusMaster/Framework/IServiceable.hpp \
+    ../ModbusMaster/IReadRegistersCallback.hpp
 
 SOURCES += \
-    main.cpp \
-    Test_Framework_Parameter.cpp \
+    main.cpp \    
     ../ModbusMaster/ModbusMaster.cpp \
     ../ModbusMaster/FrameRouter.cpp \
     ../ModbusMaster/RequestModel.cpp \
     ../ModbusMaster/FrameLayer.cpp \
-    ../ModbusMaster/Strategies/ReadRegistersStrategy.cpp \
-    ../ModbusMaster/Framework/Parameter.cpp \
+    ../ModbusMaster/Strategies/ReadRegistersStrategy.cpp \    
     Test_Framework_TransmitReceive.cpp \    
     Test_FrameRouter.cpp \
     ../ModbusMaster/Framework/Frame/ReadRegistersFrame.cpp \
     Test_ReadRegistersStrategy.cpp \
-    ../ModbusMaster/Framework/Frame/FrameHeader.cpp
+    ../ModbusMaster/Framework/Frame/FrameHeader.cpp \
+    ../ModbusMaster/Framework/Frame/FrameRequestModel.cpp \
+    Test_IntegrationTest.cpp

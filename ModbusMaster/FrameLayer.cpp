@@ -4,17 +4,34 @@ namespace ModbusMaster
 {
     FrameLayer::FrameLayer() :
         _expectedHeader(0,0),
+        _expectedDataBytesRemaining(0),
+        _callback(nullptr),
         _receiveState(ReceiveState::Idle)
     {}
+
+    FrameLayer::~FrameLayer()
+    {}
+
+    void FrameLayer::Service(uint64_t)
+    {
+        if (_receiveState == ReceiveState::Done && _callback != nullptr)
+        {
+            _callback->Receive(_receivedDataBytes);
+        }
+    }
 
     bool FrameLayer::Receive(Framework::Frame::FrameRequestModel &frameRequestModel)
     {
         auto& frame = frameRequestModel.GetFrame();
         auto bytes = frame.GetBytes();
 
-        PrepareReceive(frame.GetFrameHeder(), frameRequestModel.GetExpectedResponseDataBytes());
+        if (Transmit(bytes))
+        {
+            PrepareReceive(frameRequestModel);
+            return true;
+        }
 
-        return Transmit(bytes);
+        return false;
     }
 
     bool FrameLayer::Receive(std::vector<uint8_t>& data)
@@ -55,7 +72,7 @@ namespace ModbusMaster
 
             case ReceiveState::FunctionCode:
             {
-		// tbd : Handle exception!
+                // tbd : Handle exception!
                 if (static_cast<Framework::FunctionCode>(byte) == _expectedHeader.GetFunctionCode())
                 {
                     _receiveState = ReceiveState::Data;
@@ -70,7 +87,7 @@ namespace ModbusMaster
 
             case ReceiveState::Data:
             {
-                _receivedBytes.push_back(byte);
+                _receivedDataBytes.push_back(byte);
                 _expectedDataBytesRemaining--;
 
                 if (_expectedDataBytesRemaining == 0)
@@ -107,10 +124,11 @@ namespace ModbusMaster
         return true;
     }
 
-    void FrameLayer::PrepareReceive(Framework::Frame::FrameHeader header, size_t dataBytes)
+    void FrameLayer::PrepareReceive(Framework::Frame::FrameRequestModel &frameRequestModel)
     {
-        _expectedHeader = header;
-        _expectedDataBytesRemaining = dataBytes;
+        _expectedHeader = frameRequestModel.GetFrame().GetFrameHeder();
+        _expectedDataBytesRemaining = frameRequestModel.GetExpectedResponseDataBytes();
+        _callback = &frameRequestModel.GetCallback();
         _receiveState = ReceiveState::SlaveId;
     }
 
