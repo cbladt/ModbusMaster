@@ -7,8 +7,8 @@ namespace Framework
 {
     enum class FunctionCode
     {
-        ReadInput = 3,
-        ReadHolding = 4,
+        ReadHolding = 3,
+        ReadInput = 4,
         WriteMultiple = 10
     };
 } // Namespace Framework.

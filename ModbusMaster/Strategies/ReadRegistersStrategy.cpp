@@ -14,21 +14,21 @@ namespace Strategies
     {}
 
     bool ReadRegistersStratety::Receive(RequestModel &data)
-    {
-        // Ensure not empty.
-        if (data.GetParameters().empty()) return false;
-
+    {        
         // Ensure not too many params.
-        if (data.GetParameters().size() > MaxParamsPerRequest) return false;
+        if (data.GetCount() > MaxParamsPerRequest) return false;
 
-        auto start = data.GetParameters().front().GetAddress();
-        auto count = static_cast<uint16_t>(data.GetParameters().size());
+        auto start = data.GetStartAddress();
 
+        // Create frame.
         Framework::Frame::FrameHeader header(data.GetDevice(), data.GetFunctionCode());
+        Framework::Frame::ReadRegistersFrame frame(header, start, data.GetCount());
 
-        Framework::Frame::ReadRegistersFrame frame(header, start, count);
+        // Create FrameRequestModel.
+        uint8_t expectedBytes = (data.GetCount() * 2) + 1; // Total Size of all parameters + Datalength.
+        Framework::Frame::FrameRequestModel frameRequestModel(frame, expectedBytes);
 
-        return Transmit(frame);
+        return Transmit(frameRequestModel);
     }
 } // Namespace Strategies.
 } // Namespace ModbusMaster.

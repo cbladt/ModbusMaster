@@ -2,8 +2,8 @@
 #define REQUESTMODEL_HPP
 
 #include <Framework/FunctionCode.hpp>
-#include <Framework/Parameter.hpp>
 
+#include <cstdint>
 #include <vector>
 
 namespace ModbusMaster
@@ -11,18 +11,24 @@ namespace ModbusMaster
     class RequestModel
     {
     public:
-        RequestModel(uint8_t device, Framework::FunctionCode functionCode, const std::vector<Framework::Parameter>& parameters);
+        RequestModel(uint8_t device, Framework::FunctionCode functionCode, uint16_t startAddress, uint16_t count, uint16_t* values = nullptr);
 
         uint8_t GetDevice() const;
 
-        Framework::FunctionCode GetFunctionCode() const;
+        Framework::FunctionCode GetFunctionCode() const;        
 
-        const std::vector<Framework::Parameter>& GetParameters() const;
+        uint16_t GetStartAddress() const;
+
+        uint16_t GetCount() const;
+
+        uint16_t* GetValues() const;
 
     private:
         uint8_t _device;
         Framework::FunctionCode _functionCode;
-        const std::vector<Framework::Parameter>& _parameters;
+        uint16_t _startAddress;
+        uint16_t _count;
+        uint16_t* _values;
     };
 } // Namespace ModbusMaster.
 

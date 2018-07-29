@@ -10,63 +10,39 @@ namespace ModbusMaster
 
         // Framerouter -> Strategy.
         _frameRouter.GetReadInputSubject().Subscribe(_readInputStrategy);
-        _frameRouter.GetReadInputSubject().Subscribe(_readHoldingStrategy);
+        _frameRouter.GetReadHoldingSubject().Subscribe(_readHoldingStrategy);
 
         // Strategy -> Framelayer.
         _readInputStrategy.Subscribe(_frameLayer);
         _readHoldingStrategy.Subscribe(_frameLayer);
 
-        // Framelayer -> IDatalink.
+        // Framelayer -> IDataLink.
         _frameLayer.Subscribe(_datalink);
+
+
+        // IDataLink -> FrameLayer.
+        _datalink.Subscribe(_frameLayer);
     }
 
-    bool ModbusMaster::ReadParameters(uint8_t slave, const std::vector<Framework::Parameter> &parameters)
+    bool ModbusMaster::ReadParameters(uint8_t slave, Framework::FunctionCode type, uint16_t startAddress, uint16_t count)
     {
-        if (parameters.empty()) return false;
+        if (!SlaveIdIsValid(slave)) return false;
 
-        // Ensure all params are of the same type.
-        auto type = parameters.front().GetType();
-        for (auto& param : parameters)
-        {
-            if (param.GetType() != type) return false;
-        }
-
-        // Route to the correct method.
-        if (type == Framework::ParameterType::Holding)
-        {
-            return ReadHoldingParameters(slave, parameters);
-        }
-        else if (type == Framework::ParameterType::Input)
-        {
-            return ReadInputParameters(slave, parameters);
-        }
-
-        return false;
-    }
-
-    bool ModbusMaster::WriteParameters(uint8_t slave, const std::vector<Framework::Parameter> &parameters)
-    {
-        if (parameters.empty()) return false;
-
-        // Ensure all params are holding.
-        for (auto& param : parameters)
-        {
-            if (param.GetType() != Framework::ParameterType::Holding) return false;
-        }
-
-        RequestModel model(slave, Framework::FunctionCode::WriteMultiple, parameters);
+        RequestModel model(slave, type, startAddress, count);
         return Transmit(model);
     }
 
-    bool ModbusMaster::ReadHoldingParameters(uint8_t slave, const std::vector<Framework::Parameter> &parameters)
+    bool ModbusMaster::WriteParameters(uint8_t slave, uint16_t startAddress, uint16_t count, uint16_t* values)
     {
-        RequestModel model(slave, Framework::FunctionCode::ReadHolding, parameters);
+        if (!SlaveIdIsValid(slave)) return false;
+        if (values == nullptr) return false;
+
+        RequestModel model(slave, Framework::FunctionCode::ReadHolding, startAddress, count, values);
         return Transmit(model);
     }
 
-    bool ModbusMaster::ReadInputParameters(uint8_t slave, const std::vector<Framework::Parameter> &parameters)
+    bool ModbusMaster::SlaveIdIsValid(uint8_t slaveId) const
     {
-        RequestModel model(slave, Framework::FunctionCode::ReadInput, parameters);
-        return Transmit(model);
+        return slaveId <= 247;
     }
 } // Namespace ModbusMaster.

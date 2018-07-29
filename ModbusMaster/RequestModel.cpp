@@ -2,10 +2,12 @@
 
 namespace ModbusMaster
 {
-    RequestModel::RequestModel(uint8_t device, Framework::FunctionCode functionCode, const std::vector<Framework::Parameter> &parameters) :
+    RequestModel::RequestModel(uint8_t device, Framework::FunctionCode functionCode, uint16_t startAddress, uint16_t count, uint16_t values[]) :
         _device(device),
         _functionCode(functionCode),
-        _parameters(parameters)
+        _startAddress(startAddress),
+        _count(count),
+        _values(values)
     {}
 
     uint8_t RequestModel::GetDevice() const
@@ -18,8 +20,18 @@ namespace ModbusMaster
         return _functionCode;
     }
 
-    const std::vector<Framework::Parameter>& RequestModel::GetParameters() const
+    uint16_t RequestModel::GetStartAddress() const
     {
-        return _parameters;
+        return _startAddress;
+    }
+
+    uint16_t RequestModel::GetCount() const
+    {
+        return _count;
+    }
+
+    uint16_t* RequestModel::GetValues() const
+    {
+        return _values;
     }
 } // Namespace ModbusMaster.

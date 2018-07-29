@@ -3,11 +3,11 @@
 
 #include <IDataLink.hpp>
 #include <RequestModel.hpp>
+#include <Strategies/ReadRegistersStrategy.hpp>
 #include <FrameRouter.hpp>
 #include <FrameLayer.hpp>
-#include <Strategies/ReadRegistersStrategy.hpp>
+#include <Framework/FunctionCode.hpp>
 #include <Framework/TransmitBase.hpp>
-#include <Framework/Parameter.hpp>
 
 #include <cstdint>
 #include <vector>
@@ -15,18 +15,17 @@
 namespace ModbusMaster
 {
     class ModbusMaster :
-            public Framework::TransmitBase<RequestModel>
+            protected Framework::TransmitBase<RequestModel>
     {
     public:
         ModbusMaster(IDataLink& datalink);
 
-        bool ReadParameters(uint8_t slave, const std::vector<Framework::Parameter>& parameters);
+        bool ReadParameters(uint8_t slave, Framework::FunctionCode type, uint16_t startAddress, uint16_t count);
 
-        bool WriteParameters(uint8_t slave, const std::vector<Framework::Parameter>& parameters);
+        bool WriteParameters(uint8_t slave, uint16_t startAddress, uint16_t count, uint16_t* values);
 
     private:
-        bool ReadInputParameters(uint8_t slave, const std::vector<Framework::Parameter>& parameters);
-        bool ReadHoldingParameters(uint8_t slave, const std::vector<Framework::Parameter>& parameters);
+        bool SlaveIdIsValid(uint8_t slaveId) const;
 
         IDataLink& _datalink;
         FrameRouter _frameRouter;

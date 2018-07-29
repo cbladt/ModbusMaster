@@ -17,13 +17,6 @@ namespace Framework
             _subscriber(nullptr)
         {}
 
-        bool Transmit(T& data)
-        {
-            if (_subscriber == nullptr) return false;
-
-            return _subscriber->Receive(data);
-        }
-
         bool Subscribe(IReceive<T>& subscriber)
         {
             if (_subscriber == nullptr)
@@ -46,6 +39,13 @@ namespace Framework
                 _subscriber = nullptr;
                 return true;
             }
+        }
+
+        bool Transmit(T& data)
+        {
+            if (_subscriber == nullptr) return false;
+
+            return _subscriber->Receive(data);
         }
 
     private:
