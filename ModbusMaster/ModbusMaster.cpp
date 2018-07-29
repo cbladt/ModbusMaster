@@ -10,9 +10,11 @@ namespace ModbusMaster
 
         // Framerouter -> Strategy.
         _frameRouter.GetReadInputSubject().Subscribe(_readInputStrategy);
+        _frameRouter.GetReadInputSubject().Subscribe(_readHoldingStrategy);
 
         // Strategy -> Framelayer.
         _readInputStrategy.Subscribe(_frameLayer);
+        _readHoldingStrategy.Subscribe(_frameLayer);
 
         // Framelayer -> IDatalink.
         _frameLayer.Subscribe(_datalink);
@@ -45,6 +47,12 @@ namespace ModbusMaster
     bool ModbusMaster::WriteParameters(uint8_t slave, const std::vector<Framework::Parameter> &parameters)
     {
         if (parameters.empty()) return false;
+
+        // Ensure all params are holding.
+        for (auto& param : parameters)
+        {
+            if (param.GetType() != Framework::ParameterType::Holding) return false;
+        }
 
         RequestModel model(slave, Framework::FunctionCode::WriteMultiple, parameters);
         return Transmit(model);

@@ -18,13 +18,16 @@ HEADERS += \
     ../ModbusMaster/IDataLink.hpp \
     ../ModbusMaster/FrameRouter.hpp \
     ../ModbusMaster/RequestModel.hpp \
-    ../ModbusMaster/Strategies/ReadInputStratety.hpp \
+    ../ModbusMaster/Strategies/ReadRegistersStrategy.hpp \
     ../ModbusMaster/Framework/TransmitBase.hpp \    
     ../ModbusMaster/Framework/IReceive.hpp \
     ../ModbusMaster/Framework/FunctionCode.hpp \
     ../ModbusMaster/Framework/Parameter.hpp \
-    ../ModbusMaster/Framework/ParameterType.hpp \
-    ../ModbusMaster/Framework/Frame/Frame.hpp
+    ../ModbusMaster/Framework/ParameterType.hpp \    
+    ../ModbusMaster/Strategies/IStrategy.hpp \
+    ../ModbusMaster/Framework/Frame/IFrame.hpp \
+    ../ModbusMaster/Framework/Frame/ReadRegistersFrame.hpp \
+    ../ModbusMaster/Framework/Frame/FrameHeader.hpp
 
 SOURCES += \
     main.cpp \
@@ -33,8 +36,10 @@ SOURCES += \
     ../ModbusMaster/FrameRouter.cpp \
     ../ModbusMaster/RequestModel.cpp \
     ../ModbusMaster/FrameLayer.cpp \
-    ../ModbusMaster/Strategies/ReadInputStratety.cpp \    
+    ../ModbusMaster/Strategies/ReadRegistersStrategy.cpp \
     ../ModbusMaster/Framework/Parameter.cpp \
-    Test_Framework_TransmitReceive.cpp \
-    ../ModbusMaster/Framework/Frame/Frame.cpp \
-    Test_FrameRouter.cpp
+    Test_Framework_TransmitReceive.cpp \    
+    Test_FrameRouter.cpp \
+    ../ModbusMaster/Framework/Frame/ReadRegistersFrame.cpp \
+    Test_ReadRegistersStrategy.cpp \
+    ../ModbusMaster/Framework/Frame/FrameHeader.cpp

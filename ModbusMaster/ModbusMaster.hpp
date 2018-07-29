@@ -5,7 +5,7 @@
 #include <RequestModel.hpp>
 #include <FrameRouter.hpp>
 #include <FrameLayer.hpp>
-#include <Strategies/ReadInputStratety.hpp>
+#include <Strategies/ReadRegistersStrategy.hpp>
 #include <Framework/TransmitBase.hpp>
 #include <Framework/Parameter.hpp>
 
@@ -32,7 +32,8 @@ namespace ModbusMaster
         FrameRouter _frameRouter;
         FrameLayer _frameLayer;
 
-        Strategies::ReadInputStratety _readInputStrategy;
+        Strategies::ReadRegistersStratety _readInputStrategy;
+        Strategies::ReadRegistersStratety _readHoldingStrategy;
     };
 } // Namespace ModbusMaster.
 
