@@ -1,8 +1,9 @@
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
-# Thoughts
-.. 
+# Thoughts / Notes / TBD  
+* Add IsBusy to public interface.  
+* Fix all the 'tbd' added in code.  
 
 ### Framework
 The idea of this folder, is that modules in there will be reuseable for my upcoming slave implementation.
@@ -23,6 +24,6 @@ Can be edited with https://draw.io
   * Write Single Register (6) (Do we really need this one?)
   * Write Multiple Registers (10)
 
-* ModbusMaster must be designed in a way that makes it easy to add further function codes.
+* ModbusMaster must be designed in a way that makes it easy to implement further function codes.
 
 * ModbusMaster shall not be specifc to any hardware.
