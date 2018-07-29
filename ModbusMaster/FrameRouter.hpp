@@ -3,7 +3,7 @@
 
 #include <Framework/IReceive.hpp>
 #include <Framework/TransmitBase.hpp>
-#include <Strategies/ReadInputStratety.hpp>
+#include <Strategies/ReadRegistersStrategy.hpp>
 #include <RequestModel.hpp>
 
 #include <cstdint>
