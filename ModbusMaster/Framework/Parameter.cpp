@@ -4,7 +4,7 @@ namespace ModbusMaster
 {
 namespace Framework
 {
-    Parameter::Parameter(uint16_t address, ParameterType type, uint16_t size, const std::vector<uint8_t>& value) :
+    Parameter::Parameter(uint16_t address, ParameterType type, size_t size, const std::vector<uint8_t>& value) :
         _address(address),
         _type(type),
         _size(size),
@@ -26,7 +26,7 @@ namespace Framework
         return _address;
     }
 
-    uint16_t Parameter::GetSize() const
+    size_t Parameter::GetSize() const
     {
         return _size;
     }

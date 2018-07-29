@@ -4,6 +4,7 @@
 #include <Framework/ParameterType.hpp>
 
 #include <cstdint>
+#include <cstddef>
 #include <vector>
 
 namespace ModbusMaster
@@ -17,7 +18,7 @@ namespace Framework
     class Parameter
     {
     public:
-        Parameter(uint16_t address, ParameterType type, uint16_t size, const std::vector<uint8_t>& value = std::vector<uint8_t>());
+        Parameter(uint16_t address, ParameterType type, size_t size, const std::vector<uint8_t>& value = std::vector<uint8_t>());
 
         void Setvalue(const std::vector<uint8_t>& value);
 
@@ -25,13 +26,13 @@ namespace Framework
 
         uint16_t GetAddress() const;
 
-        uint16_t GetSize() const;
+        size_t GetSize() const;
 
         const std::vector<uint8_t>& GetValue() const;
     private:
         uint16_t _address;
         ParameterType _type;
-        uint16_t _size;
+        size_t _size;
         std::vector<uint8_t> _value;
     };
 } // Namespace Framework.
