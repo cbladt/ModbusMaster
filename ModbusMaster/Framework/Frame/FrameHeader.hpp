@@ -1,0 +1,4 @@
+#ifndef FRAMEHEADER_HPP
+#define FRAMEHEADER_HPP
+
+#endif // FRAMEHEADER_HPP
