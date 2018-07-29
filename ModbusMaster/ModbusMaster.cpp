@@ -26,8 +26,7 @@ namespace ModbusMaster
         _datalink.Subscribe(_frameLayer);
 
         // The strategy in use has told the Framelayer to be called back on.
-
-
+        // The strategy in use knows it's user-callback.
     }
 
     void ModbusMaster::Service(uint64_t ms)
