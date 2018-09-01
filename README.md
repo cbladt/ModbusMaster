@@ -1,3 +1,6 @@
+# Development
+Ended trying a 3rd party library that seems to work ok. So the development is on hold for now.  
+
 # ModbusMaster
 One Modbus Master implementation to rule them all!  
 
