@@ -10,7 +10,7 @@ class Datalink :
         public ModbusMaster::IDataLink
 {
 public:
-    bool Receive(std::vector<uint8_t> &bytes)
+    bool Receive(ModbusMaster::Framework::Frame::FrameContent &bytes)
     {
         for (auto b : bytes)
         {
@@ -20,7 +20,7 @@ public:
         return true;
     }
 
-    bool SendResponse(std::vector<uint8_t>& data)
+    bool SendResponse(ModbusMaster::Framework::Frame::FrameContent& data)
     {
         return Transmit(data);
     }
@@ -43,7 +43,7 @@ class ReadCallback :
         public ModbusMaster::IReadRegistersCallback
 {
 public:
-    void ReadRegistersCallback(ModbusMaster::Framework::FunctionCode type, uint16_t startAddress, uint16_t count, uint16_t* value)
+    void ReadRegistersCallback(ModbusMaster::Framework::FunctionCode type, uint16_t startAddress, uint16_t count, const uint16_t* value)
     {
         (void)type;
         (void)startAddress;
@@ -91,7 +91,15 @@ TEST(IntegrationTest, ReadHolding)
         0,
         0
     };
-    ASSERT_TRUE(datalink.SendResponse(response));
+
+    // tbd
+    ModbusMaster::Framework::Frame::FrameContent content;
+    for (auto& byte : response)
+    {
+        content.Push(byte);
+    }
+
+    ASSERT_TRUE(datalink.SendResponse(content));
 
     master.Service(0);
 }

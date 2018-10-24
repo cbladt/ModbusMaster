@@ -16,7 +16,7 @@ namespace Strategies
     class StrategyBase :
             public Framework::IServiceable,
             public Framework::IReceive<RequestModel>,
-            public Framework::IReceive<std::vector<uint8_t>>,
+            public Framework::IReceive<Framework::Frame::FrameContent>,
             public Framework::TransmitBase<Framework::Frame::FrameRequestModel>
     {};
 } // Namespace Strategies.

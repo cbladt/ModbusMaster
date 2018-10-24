@@ -11,15 +11,15 @@ namespace Frame
         _startAddress(startAddress),
         _count(count)
     {
-        _bytes.push_back(_header.GetSlaveId());
-        _bytes.push_back(static_cast<uint8_t>(_header.GetFunctionCode()));
-        _bytes.push_back(reinterpret_cast<uint8_t*>(&_startAddress)[1]);
-        _bytes.push_back(reinterpret_cast<uint8_t*>(&_startAddress)[0]);
-        _bytes.push_back(reinterpret_cast<uint8_t*>(&_count)[1]);
-        _bytes.push_back(reinterpret_cast<uint8_t*>(&_count)[0]);
+        _bytes.Push(_header.GetSlaveId());
+        _bytes.Push(static_cast<uint8_t>(_header.GetFunctionCode()));
+        _bytes.Push(reinterpret_cast<uint8_t*>(&_startAddress)[1]);
+        _bytes.Push(reinterpret_cast<uint8_t*>(&_startAddress)[0]);
+        _bytes.Push(reinterpret_cast<uint8_t*>(&_count)[1]);
+        _bytes.Push(reinterpret_cast<uint8_t*>(&_count)[0]);
     }
 
-    const std::vector<uint8_t>& ReadRegistersFrame::GetBytes()
+    FrameContent& ReadRegistersFrame::GetBytes()
     {
         return _bytes;
     }

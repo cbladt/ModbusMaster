@@ -1,7 +1,7 @@
 include(gtest_dependency.pri)
 
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG += thread
 CONFIG -= qt
@@ -31,7 +31,8 @@ HEADERS += \
     ../ModbusMaster/Framework/IServiceable.hpp \
     ../ModbusMaster/Framework/Tick_t.hpp \
     ../ModbusMaster/Framework/IServiceable.hpp \
-    ../ModbusMaster/IReadRegistersCallback.hpp
+    ../ModbusMaster/IReadRegistersCallback.hpp \
+    ../ModbusMaster/Framework/Frame/FrameContent.hpp
 
 SOURCES += \
     main.cpp \    
@@ -46,4 +47,5 @@ SOURCES += \
     Test_ReadRegistersStrategy.cpp \
     ../ModbusMaster/Framework/Frame/FrameHeader.cpp \
     ../ModbusMaster/Framework/Frame/FrameRequestModel.cpp \
-    Test_IntegrationTest.cpp
+    Test_IntegrationTest.cpp \
+    ../ModbusMaster/Framework/Frame/FrameContent.cpp

@@ -6,7 +6,7 @@ namespace Framework
 {
 namespace Frame
 {
-    FrameRequestModel::FrameRequestModel(IFrame &frame, Framework::IReceive<std::vector<uint8_t>>& callback, size_t expectedReponseDataBytes) :
+    FrameRequestModel::FrameRequestModel(IFrame &frame, Framework::IReceive<FrameContent>& callback, size_t expectedReponseDataBytes) :
         _frame(frame),
         _callback(callback),
         _expectedResponseDataBytes(expectedReponseDataBytes)
@@ -17,7 +17,7 @@ namespace Frame
         return _frame;
     }
 
-    Framework::IReceive<std::vector<uint8_t>>& FrameRequestModel::GetCallback() const
+    Framework::IReceive<FrameContent>& FrameRequestModel::GetCallback() const
     {
         return _callback;
     }

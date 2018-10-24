@@ -3,8 +3,6 @@
 
 #include <Framework/IReceive.hpp>
 
-#include <vector>
-
 namespace ModbusMaster
 {
 namespace Framework
@@ -17,35 +15,44 @@ namespace Framework
             _subscriber(nullptr)
         {}
 
-        bool Subscribe(IReceive<T>& subscriber)
+        virtual ~TransmitBase() = default;
+
+        bool Subscribe(IReceive<T>& subscriber) noexcept
         {
+            bool status = false;
+
             if (_subscriber == nullptr)
             {
                 _subscriber = &subscriber;
-                return true;
+                status = true;
             }
 
-            return false;
+            return status;
         }
 
-        bool Unsubscribe()
+        bool Unsubscribe() noexcept
         {
-            if (_subscriber == nullptr)
-            {
-                return false;
-            }
-            else
+            bool status = false;
+
+            if (_subscriber != nullptr)
             {
                 _subscriber = nullptr;
-                return true;
+                status = true;
             }
+
+            return status;
         }
 
         bool Transmit(T& data)
         {
-            if (_subscriber == nullptr) return false;
+            bool status = false;
 
-            return _subscriber->Receive(data);
+            if (_subscriber != nullptr)
+            {
+                status = _subscriber->Receive(data);
+            }
+
+            return status;
         }
 
     private:

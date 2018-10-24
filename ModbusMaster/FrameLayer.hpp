@@ -11,9 +11,9 @@ namespace ModbusMaster
 {
     class FrameLayer :
             public Framework::IServiceable,
-            public Framework::IReceive<std::vector<uint8_t>>,
+            public Framework::IReceive<Framework::Frame::FrameContent>,
             public Framework::IReceive<Framework::Frame::FrameRequestModel>,
-            public Framework::TransmitBase<std::vector<uint8_t>>
+            public Framework::TransmitBase<Framework::Frame::FrameContent>
     {
     public:
         FrameLayer();
@@ -21,14 +21,14 @@ namespace ModbusMaster
 
         void Service(uint64_t ms) override;
         bool Receive(Framework::Frame::FrameRequestModel &frameRequestModel) override;
-        bool Receive(std::vector<uint8_t>& byte) override;
+        bool Receive(Framework::Frame::FrameContent& byte) override;
 
     private:
         Framework::Frame::FrameHeader _expectedHeader;
         size_t _expectedDataBytesRemaining;
-        Framework::IReceive<std::vector<uint8_t>>* _callback;
+        Framework::IReceive<Framework::Frame::FrameContent>* _callback;
 
-        std::vector<uint8_t> _receivedDataBytes;
+        Framework::Frame::FrameContent _receivedDataBytes;
         uint16_t _receivedCrc;
 
         enum class ReceiveState

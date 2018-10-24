@@ -15,18 +15,24 @@ namespace Strategies
     {
     public:
         ReadRegistersStratety(IReadRegistersCallback& callback);
+        ~ReadRegistersStratety() = default;
 
-        void Service(uint64_t ms) override;
+        void Service(uint64_t ms) final;
 
-        bool Receive(RequestModel &data) override;
+        bool Receive(RequestModel &data) final;
 
-        bool Receive(std::vector<uint8_t>& data) override;
+        bool Receive(Framework::Frame::FrameContent& data) final;
 
     private:
         IReadRegistersCallback& _callback;
 
         bool _isExpecting;
-        Framework::Frame::ReadRegistersFrame _lastTransmittedFrame;
+        Framework::Frame::FrameHeader _lastTransmittedFrameHeader;
+        uint16_t _lastTransmittedRegisterCount;
+        uint16_t _lastTransmittedStartAddress;
+
+        ReadRegistersStratety(const ReadRegistersStratety&) = delete;
+        const ReadRegistersStratety& operator=(const ReadRegistersStratety&) = delete;
     };
 } // Namespace Strategies.
 } // Namespace ModbusMaster.

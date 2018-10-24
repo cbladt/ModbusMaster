@@ -11,7 +11,7 @@ namespace ModbusMaster
     public:
         virtual ~IReadRegistersCallback() {}
 
-        virtual void ReadRegistersCallback(Framework::FunctionCode type, uint16_t startAddress, uint16_t count, uint16_t* value) = 0;
+        virtual void ReadRegistersCallback(Framework::FunctionCode type, uint16_t startAddress, uint16_t count, const uint16_t* value) = 0;
     };
 } // Namespace ModbusMaster.
 

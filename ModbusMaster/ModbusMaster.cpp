@@ -21,7 +21,6 @@ namespace ModbusMaster
         // Framelayer -> IDataLink.
         _frameLayer.Subscribe(_datalink);
 
-
         // IDataLink -> FrameLayer.
         _datalink.Subscribe(_frameLayer);
 

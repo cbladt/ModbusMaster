@@ -23,7 +23,7 @@ namespace ModbusMaster
     bool FrameLayer::Receive(Framework::Frame::FrameRequestModel &frameRequestModel)
     {
         auto& frame = frameRequestModel.GetFrame();
-        auto bytes = frame.GetBytes();
+        auto& bytes = frame.GetBytes();
 
         if (Transmit(bytes))
         {
@@ -34,7 +34,7 @@ namespace ModbusMaster
         return false;
     }
 
-    bool FrameLayer::Receive(std::vector<uint8_t>& data)
+    bool FrameLayer::Receive(Framework::Frame::FrameContent& data)
     {
         bool result = true;
 
@@ -87,7 +87,7 @@ namespace ModbusMaster
 
             case ReceiveState::Data:
             {
-                _receivedDataBytes.push_back(byte);
+                _receivedDataBytes.Push(byte);
                 _expectedDataBytesRemaining--;
 
                 if (_expectedDataBytesRemaining == 0)

@@ -4,7 +4,6 @@
 #include <Framework/FunctionCode.hpp>
 
 #include <cstdint>
-#include <vector>
 
 namespace ModbusMaster
 {

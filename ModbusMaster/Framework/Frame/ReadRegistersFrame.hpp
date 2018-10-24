@@ -14,10 +14,11 @@ namespace Frame
     {
     public:
         ReadRegistersFrame(FrameHeader header, uint16_t startAddress, uint16_t count);
+        ~ReadRegistersFrame() = default;
 
-        const std::vector<uint8_t>& GetBytes() override;
+        FrameContent& GetBytes() final;
 
-        FrameHeader GetFrameHeder() const override;
+        FrameHeader GetFrameHeder() const final;
 
         uint16_t GetStartAddress() const;
 
@@ -28,7 +29,10 @@ namespace Frame
         uint16_t _startAddress;
         uint16_t _count;
 
-        std::vector<uint8_t> _bytes;
+        FrameContent _bytes;
+
+        ReadRegistersFrame(const ReadRegistersFrame&) = delete;
+        const ReadRegistersFrame& operator=(const ReadRegistersFrame&) = delete;
     };
 } // Namespace Frame.
 } // Namespace Framework.

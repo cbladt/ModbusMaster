@@ -9,8 +9,7 @@ namespace Framework
     class IReceive
     {
     public:
-        virtual ~IReceive() {}
-
+        virtual ~IReceive() = default;
         virtual bool Receive(T&) = 0;
     };
 

@@ -18,7 +18,7 @@ namespace ModbusMaster
     public:
         FrameRouter();
 
-        bool Receive(RequestModel& data) override;
+        bool Receive(RequestModel& data) final;
 
         Framework::TransmitBase<RequestModel>& GetReadInputSubject();
         Framework::TransmitBase<RequestModel>& GetReadHoldingSubject();

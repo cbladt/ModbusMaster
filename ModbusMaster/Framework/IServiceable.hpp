@@ -10,7 +10,7 @@ namespace Framework
     class IServiceable
     {
     public:
-        virtual ~IServiceable() {}
+        virtual ~IServiceable() = default;
         virtual void Service(uint64_t ms) = 0;
     };
 }

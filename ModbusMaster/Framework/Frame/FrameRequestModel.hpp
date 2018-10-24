@@ -2,10 +2,10 @@
 #define FRAMEREQUESTMODEL_HPP
 
 #include <Framework/Frame/IFrame.hpp>
+#include <Framework/Frame/FrameContent.hpp>
 #include <Framework/IReceive.hpp>
 
 #include <cstddef>
-#include <vector>
 
 namespace ModbusMaster
 {
@@ -16,17 +16,18 @@ namespace Frame
     class FrameRequestModel
     {
     public:
-        FrameRequestModel(IFrame& frame, Framework::IReceive<std::vector<uint8_t>>& callback, size_t expectedReponseDataBytes);
+        FrameRequestModel(IFrame& frame, Framework::IReceive<FrameContent>& callback, size_t expectedReponseDataBytes);
+        ~FrameRequestModel() = default;
 
         IFrame& GetFrame() const;
 
-        Framework::IReceive<std::vector<uint8_t>>& GetCallback() const;
+        Framework::IReceive<FrameContent>& GetCallback() const;
 
         size_t GetExpectedResponseDataBytes() const;
 
     private:
         IFrame& _frame;
-        Framework::IReceive<std::vector<uint8_t>>& _callback;
+        Framework::IReceive<FrameContent>& _callback;
         size_t _expectedResponseDataBytes;
     };
 } // Namespace Frame.

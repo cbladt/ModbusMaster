@@ -4,20 +4,21 @@
 #include <Framework/TransmitBase.hpp>
 #include <Framework/IReceive.hpp>
 
+#include <Framework/Frame/FrameContent.hpp>
+
 #include <cstdint>
-#include <vector>
 
 namespace ModbusMaster
 {
     class IDataLink :
-            public Framework::IReceive<std::vector<uint8_t>>,
-            public Framework::TransmitBase<std::vector<uint8_t>>
+            public Framework::IReceive<Framework::Frame::FrameContent>,
+            public Framework::TransmitBase<Framework::Frame::FrameContent>
 
     {
     public:
         virtual ~IDataLink() {}
 
-        virtual bool Receive(std::vector<uint8_t>& bytes) = 0;
+        virtual bool Receive(Framework::Frame::FrameContent& bytes) = 0;
     };
 } // Namespace ModbusMaster.
 

@@ -2,9 +2,9 @@
 #define IFRAME_HPP
 
 #include <Framework/Frame/FrameHeader.hpp>
+#include <Framework/Frame/FrameContent.hpp>
 
 #include <cstdint>
-#include <vector>
 
 namespace ModbusMaster
 {
@@ -15,10 +15,8 @@ namespace Frame
     class IFrame
     {
     public:
-        virtual ~IFrame() {}
-
-        virtual const std::vector<uint8_t>& GetBytes() = 0;
-
+        virtual ~IFrame() = default;
+        virtual FrameContent& GetBytes() = 0;
         virtual FrameHeader GetFrameHeder() const = 0;
     };
 } // Namespace Frame.

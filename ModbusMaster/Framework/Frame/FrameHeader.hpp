@@ -16,6 +16,7 @@ namespace Frame
     public:
         FrameHeader(uint8_t slaveId, FunctionCode functionCode);
         FrameHeader(uint8_t slaveId, uint8_t functionCode);
+        ~FrameHeader() = default;
 
         uint8_t GetSlaveId() const;
         FunctionCode GetFunctionCode() const;
